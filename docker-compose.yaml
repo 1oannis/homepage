@@ -1,0 +1,30 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: homepage-dev
+    environment:
+      - WATCHPACK_POLLING=true
+    volumes:
+      - .:/opt/app
+      - node_modules:/opt/app/node_modules
+      - /opt/app/.next
+      - /opt/app/public
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+  
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: homepage-prod
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.local
+
+volumes:
+  node_modules:

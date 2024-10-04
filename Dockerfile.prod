@@ -1,0 +1,44 @@
+# syntax=docker/dockerfile:1.10-labs
+# ------------------------------------------------------------
+# S T A G E  B U I L D E R
+# ------------------------------------------------------------
+    ARG NODE_VERSION=22
+
+    FROM node:${NODE_VERSION} AS builder
+
+    WORKDIR /opt/app
+
+    RUN npm install -g pnpm
+
+    COPY package.json pnpm-lock.yaml ./
+
+    RUN pnpm install
+
+    COPY . .
+
+    RUN pnpm build
+
+# ------------------------------------------------------------
+# S T A G E  P R O D U C T I O N
+# ------------------------------------------------------------
+    FROM node:${NODE_VERSION}-alpine AS production
+
+    LABEL org.opencontainers.image.title="homepage" \
+    org.opencontainers.image.description="The homepage of 1oannis.com build in next.js v14" \
+    org.opencontainers.image.version="1.0.0" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.authors="info@1oannis.com"
+
+    WORKDIR /opt/app
+
+    RUN npm install -g pnpm
+
+    COPY --from=builder /opt/app/node_modules ./node_modules
+    COPY --from=builder /opt/app/.next ./.next
+    COPY --from=builder /opt/app/public ./public
+    COPY --from=builder /opt/app/package.json ./
+    COPY --from=builder /opt/app/pnpm-lock.yaml ./
+
+    EXPOSE 3000
+
+    CMD ["pnpm", "start"]
