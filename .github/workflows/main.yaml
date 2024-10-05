@@ -11,10 +11,8 @@ on:
 jobs:
     code-quality:
         runs-on: ubuntu-latest
-
         env:
           STORE_PATH: ~/.pnpm-store
-    
         steps:
           - name: Checkout
             uses: actions/checkout@v4
@@ -49,20 +47,50 @@ jobs:
           - name: Run ESLint
             run: pnpm lint
 
-    security-check:
+    vulnerability-check:
         runs-on: ubuntu-latest
-        
+        env:
+          STORE_PATH: ~/.pnpm-store
         steps:
-        - uses: actions/checkout@v4
-        - name: Run Snyk to check for vulnerabilities
-          uses: snyk/actions/node@master
-          env:
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN || '' }}
-            
+          - name: Checkout
+            uses: actions/checkout@v4
+    
+          - name: Install Node.js
+            uses: actions/setup-node@v4
+            with:
+              node-version: 20
+    
+          - uses: pnpm/action-setup@v4
+            name: Install pnpm
+            with:
+              version: latest
+              run_install: false
+    
+          - name: Get pnpm store directory
+            shell: bash
+            run: |
+              echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+    
+          - uses: actions/cache@v4
+            name: Setup pnpm cache
+            with:
+              path: ${{ env.STORE_PATH }}
+              key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+              restore-keys: |
+                ${{ runner.os }}-pnpm-store-
+    
+          - name: Install dependencies
+            run: pnpm install
+
+          - uses: actions/checkout@v4
+          - name: Run Snyk to check for vulnerabilities
+            uses: snyk/actions/node@master
+            env:
+                SNYK_TOKEN: ${{ secrets.SNYK_TOKEN || '' }}
 
     build:
         runs-on: ubuntu-latest
-        needs: [code-quality, security-check]
+        needs: [code-quality, vulnerability-check]
 
         env:
           STORE_PATH: ~/.pnpm-store
