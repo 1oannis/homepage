@@ -82,7 +82,6 @@ jobs:
           - name: Install dependencies
             run: pnpm install
 
-          - uses: actions/checkout@v4
           - name: Run Snyk to check for vulnerabilities
             uses: snyk/actions/node@master
             env:
