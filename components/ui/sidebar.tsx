@@ -36,9 +36,12 @@ export default function Sidebar({ children }: Readonly<{ children: React.ReactNo
     return (
         <div className="flex h-screen bg-background">
             {/* Sidebar */}
-            <aside className={cn("bg-muted/40 p-4 transition-all duration-300 ease-in-out flex flex-col", isSidebarOpen ? "w-52" : "w-16")}>
+            <aside className={cn(
+                "fixed top-0 left-0 z-40 h-screen bg-muted/40 p-4 transition-all duration-300 ease-in-out flex flex-col",
+                isSidebarOpen ? "w-52" : "w-16"
+            )}>
                 <div className={cn("flex items-center", isSidebarOpen ? "justify-between" : "justify-center", "mb-8")}>
-                {isSidebarOpen && <Image src="/logo.svg" alt="Logo" width={120} height={32} priority={true} />}
+                    {isSidebarOpen && <Image src="/logo.svg" alt="Logo" width={120} height={32} priority={true} />}
                     <Button variant="ghost" size="icon" onClick={toggleSidebar}>
                         {isSidebarOpen ? <PanelRightClose className="h-4 w-4" /> : <Image src="/logo-minimal.svg" alt="Logo-minimal" width={32} height={32} priority={true} />}
                     </Button>
@@ -56,9 +59,12 @@ export default function Sidebar({ children }: Readonly<{ children: React.ReactNo
                 </nav>
             </aside>
             {/* Main content */}
-            <main className={cn("flex-1 p-4 transition-all duration-300 ease-in-out", isSidebarOpen ? "ml-64" : "ml-16")}>
+            <div className={cn(
+                "flex-1 transition-all duration-300 ease-in-out",
+                isSidebarOpen ? "ml-52" : "ml-16"
+            )}>
                 {children}
-            </main>
+            </div>
         </div>
     )
 }

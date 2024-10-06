@@ -1,6 +1,7 @@
 import { open_sans } from "@/app/fonts"
 import "@/app/globals.css"
 import Sidebar from "@/components/ui/sidebar"
+import Header from "@/components/ui/header"
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -29,9 +30,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${open_sans.className} ${open_sans.className} antialiased`}>
+      <body className={`${open_sans.className} antialiased`}>
         <Sidebar>
-          {children}
+        <div className="flex flex-col h-full">
+            <Header />
+            <main className="flex-1 p-4 overflow-auto">
+              {children}
+            </main>
+          </div>
         </Sidebar>
       </body>
     </html>
