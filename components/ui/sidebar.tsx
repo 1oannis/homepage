@@ -30,7 +30,7 @@ function SidebarItem({ icon, label, isOpen }: SidebarItemProps) {
 }
 
 export default function Sidebar({ children }: Readonly<{ children: React.ReactNode }>) {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
 
     return (
@@ -38,9 +38,9 @@ export default function Sidebar({ children }: Readonly<{ children: React.ReactNo
             {/* Sidebar */}
             <aside className={cn("bg-muted/40 p-4 transition-all duration-300 ease-in-out flex flex-col", isSidebarOpen ? "w-52" : "w-16")}>
                 <div className={cn("flex items-center", isSidebarOpen ? "justify-between" : "justify-center", "mb-8")}>
-                {isSidebarOpen && <Image src="/logo.svg" alt="Logo" width={120} height={32} />}
+                {isSidebarOpen && <Image src="/logo.svg" alt="Logo" width={120} height={32} priority={true} />}
                     <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-                        {isSidebarOpen ? <PanelRightClose className="h-4 w-4" /> : <Image src="/logo-minimal.svg" alt="Logo-minimal" width={40} height={40} />}
+                        {isSidebarOpen ? <PanelRightClose className="h-4 w-4" /> : <Image src="/logo-minimal.svg" alt="Logo-minimal" width={32} height={32} priority={true} />}
                     </Button>
                 </div>
                 <nav className="space-y-2">
