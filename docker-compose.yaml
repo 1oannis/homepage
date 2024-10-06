@@ -12,7 +12,7 @@ services:
       - /opt/app/.next
       - /opt/app/public
     ports:
-      - "3000:3000"
+      - "80:3000"
     env_file:
       - .env.local
   
@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile.prod
     container_name: homepage-prod
     ports:
-      - "3000:3000"
+      - "80:3000"
     env_file:
       - .env.local
 
