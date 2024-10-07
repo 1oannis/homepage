@@ -1,8 +1,11 @@
-import { open_sans } from "@/app/fonts"
 import "@/app/globals.css"
-import Sidebar from "@/components/ui/sidebar"
+
+import type { Metadata } from "next"
+
+import { open_sans } from "@/app/fonts"
+import Footer from "@/components/ui/footer"
 import Header from "@/components/ui/header"
-import { Metadata } from "next";
+import Sidebar from "@/components/ui/sidebar"
 
 export const metadata: Metadata = {
   title: "Root Layout",
@@ -18,25 +21,24 @@ export const metadata: Metadata = {
         type: "image/x-icon",
         url: "/favicon-dark.ico",
         media: "(prefers-color-scheme: dark)",
-      }
+      },
     ],
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <body className={`${open_sans.className} antialiased`}>
         <Sidebar>
-        <div className="flex flex-col h-full">
+          <div className="flex h-full flex-col">
             <Header />
-            <main className="flex-1 p-4 overflow-auto">
-              {children}
-            </main>
+            <main className="flex-1 overflow-auto p-4">{children}</main>
+            <Footer />
           </div>
         </Sidebar>
       </body>
