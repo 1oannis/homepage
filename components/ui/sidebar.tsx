@@ -1,6 +1,6 @@
 "use client"
 
-import { Home, PanelRightClose, Settings, Users } from "lucide-react"
+import { Home, NotepadText, PanelRightClose, Settings } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import React, { useState } from "react"
@@ -19,14 +19,15 @@ interface SidebarItemProps {
   label: string
   isOpen: boolean
   href: string
+  onClick: () => void
 }
 
-function SidebarItem({ icon, label, isOpen, href }: SidebarItemProps) {
+function SidebarItem({ icon, label, isOpen, href, onClick }: SidebarItemProps) {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Link href={href}>
+          <Link href={href} onClick={onClick}>
             <Button
               variant="ghost"
               className={cn("w-full justify-start", isOpen ? "px-2" : "px-2")}
@@ -94,14 +95,16 @@ export default function Sidebar({
               label="Home"
               isOpen={isSidebarOpen}
               href="/"
+              onClick={toggleSidebar}
             />
           </div>
           <div className="mb-2">
             <SidebarItem
-              icon={<Users className="size-4" />}
-              label="Users"
+              icon={<NotepadText className="size-4" />}
+              label="Blog"
               isOpen={isSidebarOpen}
-              href="/users"
+              href="/blog"
+              onClick={toggleSidebar}
             />
           </div>
           <div className="mb-2">
@@ -110,6 +113,7 @@ export default function Sidebar({
               label="Settings"
               isOpen={isSidebarOpen}
               href="/settings"
+              onClick={toggleSidebar}
             />
           </div>
         </nav>
