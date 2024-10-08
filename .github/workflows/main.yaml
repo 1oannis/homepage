@@ -125,9 +125,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-        # TODO: Cache not found error in the pipeline
-        #       https://github.com/1oannis/homepage/actions/runs/11191028917/job/31113476680
-
       - uses: actions/cache@v4
         with:
           path: |

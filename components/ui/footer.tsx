@@ -6,8 +6,8 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col items-center justify-between md:flex-row">
           <div className="mb-4 md:mb-0">
-            <p className="text-sm text-muted-foreground">
-              © 2024 Your Company. All rights reserved.
+            <p className="text-sm font-bold text-muted-foreground">
+              1oannis © 2024 - All rights reserved.
             </p>
           </div>
           <nav className="flex space-x-4">
