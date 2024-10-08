@@ -8,7 +8,8 @@
 > of [1oannis.com](https://www.1oannis.com) are proprietary and not covered by the MIT License.
 > See [LICENCE](./LICENSE) file in the project root for details.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`shadcn`](https://ui.shadcn.com/docs/installation/next) and houses the personal Website of [1oannis](https://github.com/1oannis).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`shadcn`](https://ui.shadcn.com/docs/installation/next)
+which houses the personal website of [1oannis](https://github.com/1oannis).
 
 ## Contents
 
@@ -37,7 +38,7 @@ pnpm install
 
 ### Deploy the DEV Server
 
-You can develop easily on you local machine by using the built-in dev server.
+You can develop easily on your local machine by using the built-in dev server.
 
 ```PowerShell
 pnpm dev
@@ -64,7 +65,7 @@ pnpm start
 
 ## Dockerization
 
-This project can easily be containerized with [Docker](https://docs.docker.com/get-started/docker-overview) for easy deployment.
+This project can be containerized with [Docker](https://docs.docker.com/get-started/docker-overview) for easy deployment.
 
 > [!IMPORTANT]
 > This step requires at minimum a [Docker Engine](https://docs.docker.com/engine/install) installation.
@@ -90,8 +91,8 @@ docker run -p 80:3000 the1oannis/homepage:1.0.0
 
 ### Use Docker Compose
 
-> [!IMPORTANT]
-> Notice how you just used a pretty boring and manual way to dockerize an application. 
+> [!NOTE]
+> Notice how you just used a pretty boring and manual way to dockerize an application.
 > Also take a look at the different Dockerfiles [`prod`](Dockerfile.prod) / [`dev`](Dockerfile.dev)
 > and the [`docker-compose.yaml`](docker-compose.yaml) in the project root.
 
@@ -109,7 +110,7 @@ service:
     ...
 ```
 
-> [!TIP]
+> [!NOTE]
 > The `WATHCPACK_POLLING` flag enables the hot-reloading for the deployment.
 
 Deploy the dev container and go to [http://localhost](http://localhost).
@@ -135,7 +136,7 @@ docker compose down dev
 docker compose up prod
 ```
 
-> [!TIP]
+> [!IMPORTANT]
 > Prod does not allow hot-reload. However it provides a faster way to build and deploy the prod image.
 
 You can undeploy the container at any time.
