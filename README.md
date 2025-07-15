@@ -78,7 +78,7 @@ In order to build an image you only have to specify the tag and correct Dockerfi
 docker build -t the1oannis/homepage:1.0.0 -f ./Dockerfile.prod .
 ```
 
-For easier accessability you can forward the port to 80 when you run the container.
+For easier accessibility you can forward the port to 80 when you run the container.
 
 ```PowerShell
 docker run -p 80:3000 the1oannis/homepage:1.0.0
