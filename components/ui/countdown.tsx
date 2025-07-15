@@ -13,7 +13,7 @@ export default function Countdown() {
   })
 
   useEffect(() => {
-    const targetDate = new Date("2024-11-15T14:30:00+09:00").getTime()
+    const targetDate = new Date("2025-07-31T12:00:00+09:00").getTime()
 
     const timer = setInterval(() => {
       const now = new Date().getTime()
@@ -43,7 +43,7 @@ export default function Countdown() {
     <Card className="mx-auto w-full max-w-lg">
       <CardHeader>
         <CardTitle className="text-center text-2xl">
-          Countdown to November 15, 2024 14:30 GMT+9
+          Thesis Submission due in
         </CardTitle>
       </CardHeader>
       <CardContent>
